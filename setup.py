@@ -4,7 +4,7 @@ from distutils.core import setup
 setup(
     name="pivotaltracker",
     packages=["pivotaltracker"],
-    version="0.0.3",
+    version="0.0.4",
     license="BSD",
     author="Matt Pizzimenti",
     author_email="mjpizz+pivotaltracker@gmail.com",

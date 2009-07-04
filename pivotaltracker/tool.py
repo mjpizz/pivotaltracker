@@ -116,7 +116,7 @@ def run(argv=sys.argv):
         print
         print optional_style("extra description for the bug %s" % step_idx), "(optional)"
         extra_description = raw_input("> ")
-        description += extra_description
+        description += "\n" + extra_description
         
         # create the client
         client = pivotaltracker.Client(token=token)
