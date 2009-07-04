@@ -7,7 +7,10 @@ It also provides both a simple commandline interface to Pivotal.
 Quickstart
 ==========
 
-This is the primary API for using Pivotal.  First you simply create a client::
+This is the primary API for using Pivotal.  First, you need an API token from Pivotal.
+You can generate one in your profile settings: <https://www.pivotaltracker.com/profile>.
+
+Next, you simply create a client::
 
     import pivotaltracker
     client = pivotaltracker.Client(token="YOUR API TOKEN")
