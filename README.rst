@@ -30,6 +30,12 @@ Here's a quick rundown in the meantime:
 * **add_comment** (project_id, story_id, text, author=None)
 * **deliver_all_finished_stories** (project_id)
 
+Release Notes
+=============
+
+* **0.0.2** added bug submission to the tool
+* **0.0.1** original Client API object, very basic commandline tool (only submits chores)
+
 Advanced
 ========
 

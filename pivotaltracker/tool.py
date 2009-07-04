@@ -44,12 +44,21 @@ def _load_config():
     project_id = config["project_id"]
     return token, project_id
 
+def header(msg, attrs):
+    attrs += ["bold"]
+    padding = styled(" "*8 + " "*len(msg), attrs=attrs)
+    padded_message = styled(" "*4 + msg + " "*4, attrs=attrs)
+    return "%s\n%s\n%s" % (padding, padded_message, padding)
+
 def run(argv=sys.argv):
     """commandline client"""
     
     @command
     def chore(parser):
         """creates a chore in pivotal"""
+
+        print header("CHORE", attrs=["bgblue", "white"])
+        print
         
         # get config values
         token, project_id = _load_config()
@@ -58,7 +67,7 @@ def run(argv=sys.argv):
         print required_style("chore name")
         name = raw_input("> ")
         
-        print optional_style("extra description for the chore")
+        print optional_style("extra description for the chore"), "(optional)"
         description = raw_input("> ")
         
         # create the client
@@ -68,6 +77,51 @@ def run(argv=sys.argv):
             name=name,
             description=description,
             story_type="chore",
+            )
+        
+        # print the url of the story
+        print result_style(response["story"]["url"])
+    
+    @command
+    def bug(parser):
+        """creates a bug in pivotal"""
+
+        print header("BUG", attrs=["bgred", "white"])
+        print
+        
+        # get config values
+        token, project_id = _load_config()
+        
+        # get other inputs
+        print required_style("bug name")
+        name = raw_input("> ")
+        
+        # input the steps
+        step_idx = 1
+        keep_going = True
+        description = ""
+        while keep_going:
+            print optional_style("step %s" % step_idx), "(just leave a blank entry to stop giving steps)"
+            new_step = raw_input("> ")
+            if new_step.strip():
+                description += "%s. %s\n" % (step_idx, new_step)
+                keep_going = True
+                step_idx += 1
+            else:
+                keep_going = False
+        
+        # get any extra description
+        print optional_style("extra description for the bug %s" % step_idx), "(optional)"
+        extra_description = raw_input("> ")
+        description += extra_description
+        
+        # create the client
+        client = pivotaltracker.Client(token=token)
+        response = client.add_story(
+            project_id=project_id,
+            name=name,
+            description=description,
+            story_type="bug",
             )
         
         # print the url of the story
