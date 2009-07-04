@@ -30,6 +30,11 @@ Here's a quick rundown in the meantime:
 * **add_comment** (project_id, story_id, text, author=None)
 * **deliver_all_finished_stories** (project_id)
 
+Source Code
+===========
+
+You can contribute to the source code on GitHub: <http://github.com/mjpizz/pivotaltracker>
+
 Release Notes
 =============
 
