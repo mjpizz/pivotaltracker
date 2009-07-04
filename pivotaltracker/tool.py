@@ -66,6 +66,7 @@ def run(argv=sys.argv):
         # get other inputs
         print required_style("chore name")
         name = raw_input("> ")
+        print
         
         print optional_style("extra description for the chore"), "(optional)"
         description = raw_input("> ")
@@ -95,6 +96,7 @@ def run(argv=sys.argv):
         # get other inputs
         print required_style("bug name")
         name = raw_input("> ")
+        print
         
         # input the steps
         step_idx = 1
@@ -111,6 +113,7 @@ def run(argv=sys.argv):
                 keep_going = False
         
         # get any extra description
+        print
         print optional_style("extra description for the bug %s" % step_idx), "(optional)"
         extra_description = raw_input("> ")
         description += extra_description
@@ -122,6 +125,51 @@ def run(argv=sys.argv):
             name=name,
             description=description,
             story_type="bug",
+            )
+        
+        # print the url of the story
+        print result_style(response["story"]["url"])
+    
+    @command
+    def feature(parser):
+        """creates a feature in pivotal"""
+
+        print header("FEATURE", attrs=["bgyellow", "black"])
+        print
+        
+        # get config values
+        token, project_id = _load_config()
+        
+        # get other inputs
+        print required_style("feature name")
+        name = raw_input("> ")
+        print
+        
+        # walk through feature
+        description = ""
+        print required_style("As a...")
+        description += "As a " + raw_input("> ")
+
+        print required_style("I want to...")
+        description += "\n\nI want to " + raw_input("> ")
+
+        print required_style("So that...")
+        description += "\n\nSo that " + raw_input("> ")
+        description += "\n\n"
+        
+        # optional extra description
+        print
+        print optional_style("extra description for the feature"), "(optional)"
+        extra_description = raw_input("> ")
+        description += extra_description
+        
+        # create the client
+        client = pivotaltracker.Client(token=token)
+        response = client.add_story(
+            project_id=project_id,
+            name=name,
+            description=description,
+            story_type="feature",
             )
         
         # print the url of the story

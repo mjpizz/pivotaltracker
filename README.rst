@@ -33,6 +33,7 @@ Here's a quick rundown in the meantime:
 Release Notes
 =============
 
+* **0.0.3** added feature submission to the tool
 * **0.0.2** added bug submission to the tool
 * **0.0.1** original Client API object, very basic commandline tool (only submits chores)
 
