@@ -12,7 +12,7 @@ setup(
     install_requires=["PyYAML"],
     # install_recommends=[],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 3 - Alpha",
         "Programming Language :: Python",
         "License :: OSI Approved :: BSD License",
         "Intended Audience :: Developers",
